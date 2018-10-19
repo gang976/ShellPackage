@@ -48,3 +48,37 @@ Shell脚本-ipa打包专用
                 |___LogPath                  打包日志
 
 
+
+**********打包完成自动化上传 fir / 蒲公英 第三方平台************
+要上传到 fir / 蒲公英 第三方平台，都需要注册一个账号，获得token，之后才能进行脚本化操作。
+
+1. 自动化上传fir
+
+安装fir-clifir的命令行工具 需要先装好ruby再执行
+
+gem install fir-cli
+
+#上传到fir
+fir publish ${ipa_path} -T fir_token -c "${commit_msg}"
+
+
+2.自动化上传蒲公英
+
+#蒲公英上的User Key
+uKey="7381f97070*****c01fae439fb8b24e"
+#蒲公英上的API Key
+apiKey="0b27b5c145*****718508f2ad0409ef4"
+#要上传的ipa文件路径
+IPA_PATH=$(cat text.txt)
+
+rm -rf text.txt
+
+#执行上传至蒲公英的命令
+echo "++++++++++++++upload+++++++++++++"
+curl -F "file=@${IPA_PATH}" -F "uKey=${uKey}" -F "_api_key=${apiKey}" http://www.pgyer.com/apiv1/app/upload
+
+
+
+
+
+
